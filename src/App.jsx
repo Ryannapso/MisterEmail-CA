@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { HomePage } from './pages/HomePage';
 import { AboutUs } from './pages/AboutUs';
-import { EmailIndex } from './pages/EmailIndex';
+import { Emails } from './pages/Emails';
 import { AppHeader } from './cmps/AppHeader';
 import { AppFooter } from './cmps/AppFooter';
 export function App() {
@@ -14,7 +14,7 @@ export function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/aboutus" element={<AboutUs />} ></Route>
-                        <Route path="/emailindex" element={<EmailIndex />} ></Route>
+                        <Route path="/emails" element={<Emails />} ></Route>
                     </Routes>
                 </main>
                 <AppFooter />
