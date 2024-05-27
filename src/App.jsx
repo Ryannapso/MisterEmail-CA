@@ -2,16 +2,14 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { HomePage } from './pages/HomePage';
 import { AboutUs } from './pages/AboutUs';
 import { EmailIndex } from './pages/EmailIndex';
+import { AppHeader } from './cmps/AppHeader';
+import { AppFooter } from './cmps/AppFooter';
 export function App() {
 
     return (
-        <section className='main-app'>
-            <header className="app-header">
-                <section className="container">
-                    <h1>Ryannapso</h1>
-                </section>
-            </header>
-            <Router>
+        <Router>
+            <section className='main-app'>
+                <AppHeader />
                 <main className='container'>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
@@ -19,13 +17,9 @@ export function App() {
                         <Route path="/emailindex" element={<EmailIndex />} ></Route>
                     </Routes>
                 </main>
-            </Router>
-            <footer>
-                <section className="container">
-                    Ryan Napso 2024 &copy;
-                </section>
-            </footer>
-        </section>
+                <AppFooter />
+            </section>
+        </Router>
 
 
     )
