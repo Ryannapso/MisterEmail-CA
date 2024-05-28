@@ -13,10 +13,11 @@
 
 .email-item {
     display: flex;
-    flex-direction: column;
+    flex-direction:row;
     padding: 5px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
+    gap: 10px;
 }
 
 .email-item:hover {
@@ -30,6 +31,7 @@
 .email-from {
     font-weight: bold;
     margin-bottom: 5px;
+    padding-right: 40px;
 }
 
 .email-subject {
