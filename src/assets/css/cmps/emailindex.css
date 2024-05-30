@@ -1,8 +1,8 @@
 .email-index {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 2fr;
+    grid-template-areas: "s m";
+    gap: 6px;
 }
 
 .email-list {

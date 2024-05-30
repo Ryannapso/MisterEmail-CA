@@ -1,6 +1,6 @@
 export function SideBar() {
     return (
-        <div>
+        
             <div className="sidebar">
                 <button className="compose-btn">Compose</button>
                 <ul className="sidebar-options">
@@ -21,6 +21,6 @@ export function SideBar() {
                     </li>
                 </ul>
             </div>
-        </div>
+        
     )
 }
