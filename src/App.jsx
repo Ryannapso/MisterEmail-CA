@@ -20,8 +20,6 @@ export function App() {
                 <AppFooter />
             </section>
         </Router>
-
-
     )
 }
 

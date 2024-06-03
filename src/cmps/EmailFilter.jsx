@@ -1,17 +1,42 @@
+import { useEffect, useRef, useState } from "react"
 
+export function EmailFilter({ filterBy, onSetFilterBy }) {
 
-export function EmailFilter() {
+  const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+  const formRef = useRef()
 
-    const filterBy = {
-        //status: 'inbox/sent/star/trash',
-        txt: 'puki', // no need to support complex text search
-        isRead: true/false/null, // (optional property, if missing: show all)
-        }
+  useEffect(() => {
+    onSetFilterBy(filterByToEdit)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterByToEdit])
 
+  function handleChange({ target }) {
+    let { value, name: field, type } = target
+    value = type === 'number' ? +value : value
+    setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+  }
+
+  function onSubmitFilter(ev) {
+    ev.preventDefault()
+    onSetFilterBy(filterByToEdit)
+  }
+
+  const { body } = filterByToEdit
 
   return (
-    <div>
-      
-    </div>
+    <form ref={formRef} onSubmit={onSubmitFilter} className="email-filter">
+      <button className="search-button">
+        <i className="material-icons">search</i>
+      </button>
+      <input
+        onChange={handleChange}
+        name="body"
+        id="doby"
+        type="text"
+        value={body}
+        placeholder="Search mail"
+        className="search-input"
+      />
+    </form>
   )
 }

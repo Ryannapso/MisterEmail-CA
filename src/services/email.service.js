@@ -1,36 +1,34 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 
-
-
 export const emailService = {
     query,
     save,
     remove,
     getById,
-    createEmail,
+    getDefaultFilter,
 }
 
-    // const loggedinUser = {
-//     email: 'user@appsus.com',
-//     fullname: 'Mahatma Appsus'
-//     }
+
 
 const STORAGE_KEY = 'emails'
 
 _createEmails()
 
 async function query(filterBy) {
-    let emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
-        var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-        maxBatteryStatus = maxBatteryStatus || Infinity
-        minBatteryStatus = minBatteryStatus || 0
-        emails = emails.filter(email => email.type.toLowerCase().includes(type.toLowerCase()) && email.model.toLowerCase().includes(model.toLowerCase())
-            && (email.batteryStatus < maxBatteryStatus)
-            && email.batteryStatus > minBatteryStatus)
+    try {
+        let emails = await storageService.query(STORAGE_KEY)
+        if (filterBy) {
+            let { body, subject } = filterBy
+            emails = emails.filter(email =>
+                email.body.toLowerCase().includes(body.toLowerCase()) &&
+                email.subject.toLowerCase().includes(subject.toLowerCase())) 
+        }
+        return emails
+    } catch (error) {
+        console.log('error:', error)
+        throw error
     }
-    return emails
 }
 
 function getById(id) {
@@ -50,11 +48,18 @@ function save(emailToSave) {
     }
 }
 
-function createEmail(model = '', type = '', batteryStatus = 100) {
+// function createEmail(model = '', type = '', batteryStatus = 100) {
+//     return {
+//         model,
+//         batteryStatus,
+//         type
+//     }
+// }
+
+function getDefaultFilter() {
     return {
-        model,
-        batteryStatus,
-        type
+        subject: '',
+        body: '',
     }
 }
 
@@ -77,7 +82,7 @@ function _createEmails() {
                 id: 'e102',
                 subject: 'Meeting Reminder',
                 body: 'Don\'t forget about the meeting tomorrow at 10 AM.',
-                isRead: true,
+                isRead: false,
                 isStarred: true,
                 sentAt: 1551143930594,
                 removedAt: null,
@@ -88,7 +93,7 @@ function _createEmails() {
                 id: 'e103',
                 subject: 'Holiday Plans',
                 body: 'Are we still on for the holiday trip next month?',
-                isRead: false,
+                isRead: true,
                 isStarred: false,
                 sentAt: 1551153930594,
                 removedAt: null,
@@ -99,7 +104,7 @@ function _createEmails() {
                 id: 'e104',
                 subject: 'Invoice #12345',
                 body: 'Please find attached the invoice for your recent purchase.',
-                isRead: true,
+                isRead: false,
                 isStarred: false,
                 sentAt: 1551163930594,
                 removedAt: null,
@@ -110,7 +115,7 @@ function _createEmails() {
                 id: 'e105',
                 subject: 'Welcome to Our Service!',
                 body: 'Thank you for signing up. We hope you enjoy our service.',
-                isRead: false,
+                isRead: true,
                 isStarred: true,
                 sentAt: 1551173930594,
                 removedAt: null,
