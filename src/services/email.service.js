@@ -19,10 +19,17 @@ async function query(filterBy) {
     try {
         let emails = await storageService.query(STORAGE_KEY)
         if (filterBy) {
-            let { body, subject } = filterBy
+            let { body, subject, isRead } = filterBy
             emails = emails.filter(email =>
                 email.body.toLowerCase().includes(body.toLowerCase()) &&
-                email.subject.toLowerCase().includes(subject.toLowerCase())) 
+                email.subject.toLowerCase().includes(subject.toLowerCase()))
+                
+                if(isRead === "All")
+                    return emails
+                else if (isRead === "Read")
+                    emails = emails.filter(email => email.isRead)
+                else if (isRead === "Unread")
+                    emails = emails.filter(email => !email.isRead)
         }
         return emails
     } catch (error) {
@@ -60,6 +67,7 @@ function getDefaultFilter() {
     return {
         subject: '',
         body: '',
+        isRead:''
     }
 }
 
