@@ -13,7 +13,7 @@ export function EmailIndex() {
 
   useEffect(() => {
     loadEmails()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterBy])
 
   async function loadEmails() {
@@ -27,17 +27,15 @@ export function EmailIndex() {
 
   function onSetFilterBy(filterBy) {
     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-}
+  }
 
   if (!emails) return <div>Loading....</div>
 
   return (
-    <div> 
-      <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy}/>
-    <div className="email-index">
-      <SideBar />
-      <EmailList emails={emails} />
-    </div>
-    </div>
+      <div className="email-index">
+        <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy} />
+        <SideBar />
+        <EmailList emails={emails} />
+      </div> 
   )
 }

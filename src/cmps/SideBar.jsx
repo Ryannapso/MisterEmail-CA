@@ -2,7 +2,8 @@ export function SideBar() {
     return (
         
             <div className="sidebar">
-                <button className="compose-btn">Compose</button>
+                <button className="compose-btn">
+                <i className="material-icons">edit</i>Compose</button>
                 <ul className="sidebar-options">
                     <li className="sidebar-option">
                         <span className="material-icons">inbox</span> Inbox

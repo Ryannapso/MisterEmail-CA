@@ -25,23 +25,25 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
 
   return (
     <form ref={formRef} onSubmit={onSubmitFilter} className="email-filter">
-      <button className="search-button">
-        <i className="material-icons">search</i>
-      </button>
+      <div className="search">
+        <button className="search-button">
+          <i className="material-icons">search</i>
+        </button>
+        <input
+          onChange={handleChange}
+          name="body"
+          id="doby"
+          type="text"
+          value={body}
+          placeholder="Search mail"
+          className="search-input"
+        />
+      </div>
       <select name="isRead" id="isRead" value={isRead} onChange={handleChange}>
         <option value="All">All</option>
         <option value="Read">Read</option>
         <option value="Unread">Unread</option>
       </select>
-      <input
-        onChange={handleChange}
-        name="body"
-        id="doby"
-        type="text"
-        value={body}
-        placeholder="Search mail"
-        className="search-input"
-      />
     </form>
   )
 }
