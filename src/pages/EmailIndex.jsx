@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
 import { EmailFilter } from "../cmps/EmailFilter"
+import EmailSearch from "../cmps/EmailSearch"
 
 export function EmailIndex() {
 
@@ -33,6 +34,7 @@ export function EmailIndex() {
 
   return (
       <div className="email-index">
+        <EmailSearch onSetFilterBy={onSetFilterBy} filterBy={filterBy} />
         <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy} />
         <SideBar />
         <EmailList emails={emails} />
